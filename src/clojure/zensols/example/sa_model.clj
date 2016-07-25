@@ -71,19 +71,26 @@
                      (double accuracy)))))
 
 (defn- create-prediction-report []
-  (let [out-file (res/resource-path :analysis-report "sa-predictions.xls")]
-    (-> (excel/build-workbook
-         (excel/workbook-hssf)
-         {"Predictions on test data"
-          (->> (predict-test-set)
-               :results
-               (map (fn [res]
-                      (let [{:keys [label sent prediction correct?]} res]
-                        [correct? label prediction sent])))
-               (cons ["Is Correct" "Gold Label" "Prediction" "Utterance"])
-               (ss/headerize))})
-        (ss/autosize-columns)
-        (excel/save out-file))))
+  (letfn [(data-sheet [anons]
+            (->> anons
+                 (map (fn [anon]
+                        [(:class-label anon) (->> anon :instance :text)]))
+                 (cons ["Label" "Utterance"])))]
+   (let [out-file (res/resource-path :analysis-report "sa-predictions.xls")]
+     (-> (excel/build-workbook
+          (excel/workbook-hssf)
+          {"Predictions on test data"
+           (->> (predict-test-set)
+                :results
+                (map (fn [res]
+                       (let [{:keys [label sent prediction correct?]} res]
+                         [correct? label prediction sent])))
+                (cons ["Is Correct" "Gold Label" "Prediction" "Utterance"])
+                (ss/headerize))
+           "Training" (data-sheet (adb/anons))
+           "Test" (data-sheet (adb/anons :set-type :test))})
+         (ss/autosize-columns)
+         (excel/save out-file)))))
 
 (defn- main [& actions]
   (let [title "when do you want to go"]
