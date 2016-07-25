@@ -1,0 +1,30 @@
+# get an instance
+POST http://localhost:9200/example/instance/_search
+{
+    "query": { "match_all": {}},
+    "size": 1
+}
+
+# counts
+POST http://localhost:9200/example/instance/_count
+{
+    "query": { "match_all": {}}
+}
+
+# mappings
+GET http://localhost:9200/example/_mappings
+
+# just keys
+POST http://localhost:9200/example/instance/_search
+{
+    "query": { "match_all": {}},
+    "fields": []
+}
+
+## states
+GET http://localhost:9200/example/stats/_search
+{
+    "query": { "match_all": {}},
+    "from": 0,
+    "size": 9999
+}

@@ -1,0 +1,1 @@
+JAVA_OPTS="-Dzensols.model=PATH-TO-YOUR-MODELS"
