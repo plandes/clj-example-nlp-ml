@@ -1,0 +1,8 @@
+elasticsearch:
+  container_name: es
+  image: elasticsearch:2.2.0
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+  environment:
+    ES_HEAP_SIZE: 2g
