@@ -26,9 +26,9 @@
                  [com.zensols.tools/actioncli "0.0.7"]
 
                  ;; nlp/ml
-                 [com.zensols.nlp/parse "0.0.5"]
-                 [com.zensols.ml/dataset "0.0.1"]
-                 [com.zensols.ml/model "0.0.2"]
+                 [com.zensols.nlp/parse "0.0.6"]
+                 [com.zensols.ml/dataset "0.0.3"]
+                 [com.zensols.ml/model "0.0.4"]
 
                  ;; spreadsheet
                  [com.zensols.tools/misc "0.0.1"]

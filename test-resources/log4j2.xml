@@ -13,6 +13,8 @@
 
     <loggers>
         <logger name="zensols" level="info"/>
+        <!--logger name="zensols.model.eval-classifier" level="debug"/-->
+        <!--logger name="zensols.model.classifier" level="debug"/-->
         <root level="warn">
             <!--appenderRef ref="console"/-->
             <appenderRef ref="repl"/>

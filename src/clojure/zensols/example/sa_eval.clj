@@ -2,6 +2,7 @@
   (:require [clojure.tools.logging :as log]
             [clojure.set :refer (union)])
   (:require [zensols.actioncli.dynamic :refer (dyn-init-var) :as dyn]
+            [zensols.model.classifier :as cl]
             [zensols.model.execute-classifier :refer (with-model-conf)]
             [zensols.model.eval-classifier :as ec])
   (:require [zensols.example.sa-feature :as sf]
@@ -77,32 +78,40 @@
                   stopword-count
                   ))}))
 
-(dyn-init-var *ns* 'instances-inst (atom nil))
+(dyn-init-var *ns* 'cross-fold-instances-inst (atom nil))
+(dyn-init-var *ns* 'test-train-instances-inst (atom nil))
 
 (defn reset-instances []
-  (reset! instances-inst nil))
+  (reset! cross-fold-instances-inst nil)
+  (reset! test-train-instances-inst nil))
 
 (dyn/register-purge-fn reset-instances)
 
 (defn- create-model-config []
-  (merge (sf/create-model-config)
-         {:instances-inst instances-inst
-          :feature-sets-set (feature-sets-set)}))
+  (letfn [(divide-by-set [divide-ratio]
+            (adb/divide-by-set divide-ratio :shuffle? false)
+            (reset! test-train-instances-inst nil))]
+   (merge (sf/create-model-config)
+          {:cross-fold-instances-inst cross-fold-instances-inst
+           :test-train-instances-inst test-train-instances-inst
+           :feature-sets-set (feature-sets-set)
+           :divide-by-set divide-by-set})))
 
 (defn- main [& actions]
-  (binding [ec/*cross-fold-count* 2]
+  (binding [cl/*rand-fn* (fn [] (java.util.Random. 1))]
    (with-model-conf (create-model-config)
-     (let [classifiers [:fast
-                        :lazy :tree
-                        :meta :slow
+     (let [classifiers [;:fast
+                        ;:lazy :tree
+                        ;:meta :slow
                         ;:really-slow
-                        ;:j48
+                        :j48
                         ;:zeror
                         ]
            meta-set :set-best]
        (->> (map (fn [action]
                    (case action
-                     -1 (println (apply str (repeat 60 \-)))
+                     -2 (println (apply str (repeat 60 \-)))
+                     -1 (adb/load-corpora)
                      0 (dyn/purge)
                      1 (reset-instances)
                      2 (time (ec/write-arff))
@@ -112,6 +121,12 @@
                      6 (->> (ec/create-model classifiers meta-set)
                             ec/train-model
                             ec/write-model)
-                     7 (adb/divide-by-set 0.8)))
+                     7 (adb/divide-by-set 0.8)
+                     8 (ec/compile-results classifiers meta-set
+                                           :test-type :test-train)
+                     9 (->> (ec/train-test-series
+                             [:j48] :set-best {:start 0.1 :stop 1 :step 0.05})
+                            ec/write-csv-train-test-series)
+                     ))
                  actions)
             doall)))))

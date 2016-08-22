@@ -20,8 +20,8 @@
             (fe/tree-features panon)
             (fe/srl-features tokens)))))
 
-(defn create-feature-sets []
-  (->> (adb/anons)
+(defn create-feature-sets [& adb-keys]
+  (->> (apply adb/anons adb-keys)
        (map #(merge {:sa (:class-label %)
                      :utterance (->> % :instance :text)}
                     (create-features (:instance %))))))

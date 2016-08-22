@@ -46,7 +46,7 @@
                            "example"
                            :create-instances-fn parse-utterances))))
 
-(defn- load-corpora []
+(defn load-corpora []
   (with-connection (connection)
     (db/instances-load)))
 
@@ -54,9 +54,9 @@
   (with-connection (connection)
     (apply db/instances keys)))
 
-(defn divide-by-set [train-ratio]
+(defn divide-by-set [train-ratio & keys]
   (with-connection (connection)
-    (db/divide-by-set train-ratio)))
+    (apply db/divide-by-set train-ratio keys)))
 
 (defn turn-on-test-set [test?]
   (with-connection (connection)
