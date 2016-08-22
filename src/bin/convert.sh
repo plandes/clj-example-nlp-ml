@@ -1,6 +1,6 @@
 #!/bin/sh
 
-FILE=speech-act-J48-train-test-series
+FILE=../../doc/results/speech-act-J48-train-test-series
 
 ~/Applications/Graphics/Inkscape.app/Contents/Resources/bin/inkscape \
   --without-gui \
