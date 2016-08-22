@@ -16,6 +16,10 @@ Note that the library also illustrates how to use the
 [action command line interface library](https://github.com/plandes/clj-actioncli)
 as you can [build out a CLI version](#command-line).
 
+Documentation
+-------------
+API (incomplete) [documentation](https://plandes.github.io/clj-example-nlp-ml/codox/index.html).
+
 Usage
 -----
 This project provides a real working example of a statistical natural language

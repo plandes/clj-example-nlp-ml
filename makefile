@@ -20,6 +20,7 @@ PNCMD=		git remote -v | grep github | grep push | sed 's/.*\/\(.*\).git .*/\1/'
 PROJ_REF=	$(if $(PROJ),$(PROJ),$(shell $(PNCMD)))
 UBER_JAR=	$(MTARG)/$(APP_NAME_REF)$(VPREF)-standalone.jar
 DOC_DIR=	$(MTARG)/doc
+SRC_DOC_DIR=	./doc
 ASBIN_DIR=	src/asbin
 DIST_DIR=	$(HOME)/Desktop/$(APP_NAME_REF)
 DIST_BIN_DIR=	$(DIST_DIR)/bin
@@ -89,6 +90,7 @@ $(DOC_DIR):
 	  rm .git/index ; \
 	  git clean -fdx )
 	lein codox
+	[ -d $(SRC_DOC_DIR) ] && cp -r $(SRC_DOC_DIR)/* $(DOC_DIR)
 
 .PHONEY:
 pushdocs:	$(DOC_DIR)
