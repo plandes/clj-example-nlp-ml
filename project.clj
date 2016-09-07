@@ -23,7 +23,7 @@
                  [org.clojure/tools.logging "0.3.1"]
 
                  ;; command line
-                 [com.zensols.tools/actioncli "0.0.7"]
+                 [com.zensols.tools/actioncli "0.0.8"]
 
                  ;; nlp/ml
                  [com.zensols.nlp/parse "0.0.6"]
