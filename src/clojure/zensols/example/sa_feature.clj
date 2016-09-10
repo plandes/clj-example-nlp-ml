@@ -1,7 +1,6 @@
 (ns zensols.example.sa-feature
   (:require [clojure.tools.logging :as log])
-  (:require [zensols.actioncli.dynamic :refer (dyn-init-var) :as dyn]
-            [zensols.nlparse.parse :as p]
+  (:require [zensols.nlparse.parse :as p]
             [zensols.nlparse.feature :as fe]
             [zensols.example.anon-db :as adb]
             [zensols.model.execute-classifier :refer (with-model-conf)]
@@ -49,7 +48,6 @@
   (->> actions
        (map (fn [action]
               (case action
-                0 (dyn/purge)
                 1 (with-model-conf (create-model-config)
                     (ec/display-features)))))
        doall))
