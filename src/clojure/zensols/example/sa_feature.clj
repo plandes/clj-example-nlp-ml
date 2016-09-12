@@ -1,7 +1,7 @@
 (ns zensols.example.sa-feature
   (:require [clojure.tools.logging :as log])
   (:require [zensols.nlparse.parse :as p]
-            [zensols.nlparse.feature :as fe]
+            [zensols.nlparse.feature.lang :as fe]
             [zensols.example.anon-db :as adb]
             [zensols.model.execute-classifier :refer (with-model-conf)]
             [zensols.model.eval-classifier :as ec]))
