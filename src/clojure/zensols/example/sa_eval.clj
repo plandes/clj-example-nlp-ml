@@ -79,21 +79,21 @@
                   ))}))
 
 (dyn-init-var *ns* 'cross-fold-instances-inst (atom nil))
-(dyn-init-var *ns* 'test-train-instances-inst (atom nil))
+(dyn-init-var *ns* 'train-test-instances-inst (atom nil))
 
 (defn reset-instances []
   (reset! cross-fold-instances-inst nil)
-  (reset! test-train-instances-inst nil))
+  (reset! train-test-instances-inst nil))
 
 (dyn/register-purge-fn reset-instances)
 
 (defn- create-model-config []
   (letfn [(divide-by-set [divide-ratio]
             (adb/divide-by-set divide-ratio :shuffle? false)
-            (reset! test-train-instances-inst nil))]
+            (reset! train-test-instances-inst nil))]
    (merge (sf/create-model-config)
           {:cross-fold-instances-inst cross-fold-instances-inst
-           :test-train-instances-inst test-train-instances-inst
+           :train-test-instances-inst train-test-instances-inst
            :feature-sets-set (feature-sets-set)
            :divide-by-set divide-by-set})))
 
@@ -123,7 +123,7 @@
                             ec/write-model)
                      7 (adb/divide-by-set 0.8)
                      8 (ec/compile-results classifiers meta-set
-                                           :test-type :test-train)
+                                           :test-type :train-test)
                      9 (->> (ec/train-test-series
                              [:j48] :set-best {:start 0.1 :stop 1 :step 0.05})
                             ec/write-csv-train-test-series)
