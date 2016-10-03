@@ -42,11 +42,23 @@ INFO  2016-07-15 18:19:01.565: stanford: creating ner annotators: ["edu/stanford
 1. Install [Leiningen](http://leiningen.org) (this is just a script)
 2. Install [GNU make](https://www.gnu.org/software/make/)
 3. Install [Git](https://git-scm.com)
-4. Create the distribution on the desktop: `make dist`
-5. Start the Elasticsearch server using the
+4. Follow the directions in [build section](#building)
+5. Create the distribution on the desktop: `make dist`
+6. Start the Elasticsearch server using the
    [ML Dataset project](https://github.com/plandes/clj-ml-dataset)
-6. Load the corpus into Elasticsearch: `cd ~/Desktop/nlp-ml-example/bin ; ./saclassify load-corpus`
-7. Run: `./saclassify classify -u 'when will we get there'`
+7. Load the corpus into Elasticsearch: `cd ~/Desktop/nlp-ml-example/bin ; ./saclassify load-corpus`
+8. Run: `./saclassify classify -u 'when will we get there'`
+
+Building
+--------
+All [leiningen](http://leiningen.org) tasks will work in this project.  For
+additional build functionality (git tag convenience utility functionality)
+clone the [Clojure build repo](https://github.com/plandes/clj-zenbuild) in the
+same (parent of this file) directory as this project:
+```bash
+   cd ..
+   git clone https://github.com/plandes/clj-zenbuild
+```
 
 License
 --------
