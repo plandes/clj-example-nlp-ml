@@ -123,3 +123,4 @@
      :validate [#(> (count %) 0) "No utterance given"]]]
    :app (fn [{:keys [utterance] :as opts} & args]
           (println (classify-utterance utterance)))})
+
