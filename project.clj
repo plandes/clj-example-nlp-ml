@@ -23,26 +23,27 @@
                  [org.clojure/tools.logging "0.3.1"]
 
                  ;; command line
-                 [com.zensols.tools/actioncli "0.0.9"]
+                 ;[com.zensols.tools/actioncli "0.0.9"]
 
                  ;; nlp/ml
                  [com.zensols.nlp/parse "0.0.10"]
-                 [com.zensols.ml/dataset "0.0.5"]
-                 [com.zensols.ml/model "0.0.5"]
+                 [com.zensols.ml/dataset "0.0.6"]
+                 [com.zensols.ml/model "0.0.6"]
 
                  ;; spreadsheet
-                 [com.zensols.tools/misc "0.0.1"]
+                 ;[com.zensols.tools/misc "0.0.1"]
 
                  ;; dev
-                 [com.zensols.gui/tabres "0.0.5"]]
+                 ;[com.zensols.gui/tabres "0.0.5"]
+                 ]
   :pom-plugins [[org.codehaus.mojo/appassembler-maven-plugin "1.6"
                  {:configuration ([:programs
                                    [:program
                                     ([:mainClass "zensols.example.core"]
                                      [:id "saclassify"])]]
                                   [:environmentSetupFileName "setupenv"])}]]
-  :profiles {:uberjar {:aot :all}
-             :appasem {:aot :all}
+  :profiles {:uberjar {:aot [zensols.example.core]}
+             :appassem {:aot :all}
              :dev
              {:jvm-opts
               ["-Dlog4j.configurationFile=test-resources/log4j2.xml" "-Xms4g" "-Xmx12g" "-XX:+UseConcMarkSweepGC"]

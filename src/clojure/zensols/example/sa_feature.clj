@@ -2,6 +2,7 @@
   (:require [clojure.tools.logging :as log])
   (:require [zensols.nlparse.parse :as p]
             [zensols.nlparse.feature.lang :as fe]
+            [zensols.nlparse.feature.word :as fw]
             [zensols.example.anon-db :as adb]
             [zensols.model.execute-classifier :refer (with-model-conf)]
             [zensols.model.eval-classifier :as ec]))
@@ -13,9 +14,9 @@
    (log/debugf "creating features (context=<%s>) for <%s>" context panon)
    (let [tokens (p/tokens panon)]
      (merge (fe/verb-features (->> panon :sents first))
-            (fe/token-features panon tokens)
+            (fw/token-features panon tokens)
             (fe/pos-tag-features tokens)
-            (fe/dictionary-features tokens)
+            (fw/dictionary-features tokens)
             (fe/tree-features panon)
             (fe/srl-features tokens)))))
 
@@ -27,9 +28,9 @@
 
 (defn feature-metas []
   (concat (fe/verb-feature-metas)
-          (fe/token-feature-metas)
+          (fw/token-feature-metas)
           (fe/pos-tag-feature-metas)
-          (fe/dictionary-feature-metas)
+          (fw/dictionary-feature-metas #{"en"})
           (fe/tree-feature-metas)
           (fe/srl-feature-metas)))
 
