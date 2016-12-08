@@ -74,13 +74,11 @@
   ([resources-fn]
    (let [res (resources-fn)
          doc-types (->> res (map :doc-type) distinct sort)]
-    (->> res
-         (#(w/instances "doc-classify" %
-                        {:text 'string}
-                        [:doc-type doc-types]))
-         w/word-count-instances))))
-
-;(->> (create-instances) .numInstances)
+     (->> res
+          (#(w/instances "doc-classify" %
+                         {:text 'string}
+                         [:doc-type doc-types]))
+          w/word-count-instances))))
 
 (defn- write-arff
   ([]
@@ -104,22 +102,15 @@
    (swap! classifier-inst #(or % (train-classifier)))))
 
 (defn- classify [text]
- (let [inst (w/instances "doc-classify"
-                         [{:text text}]
-                         {:text 'string}
-                         [:doc-type (->> (create-zip-resources)
-                                         (map :doc-type)
-                                         distinct
-                                         sort)])]
-   (->> inst
-        w/word-count-instances
-        (#(.instance % 0))
-        (.classifyInstance (get-classifier))
-        (.value (.classAttribute inst)))))
-
-;(println (get-classifier true))
-;(println (get-classifier))
-;(do (get-classifier true) nil)
-;(println (get-classifier))
-;(write-arff)
-;(classify "whales whale whale whale whale")
+  (let [inst (w/instances "doc-classify"
+                          [{:text text}]
+                          {:text 'string}
+                          [:doc-type (->> (create-zip-resources)
+                                          (map :doc-type)
+                                          distinct
+                                          sort)])]
+    (->> inst
+         w/word-count-instances
+         (#(.instance % 0))
+         (.classifyInstance (get-classifier))
+         (.value (.classAttribute inst)))))
