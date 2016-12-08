@@ -22,10 +22,13 @@
                  [org.apache.logging.log4j/log4j-jcl "2.3"]
                  [org.clojure/tools.logging "0.3.1"]
 
+                 ;; zip
+                 [com.zensols.tools/misc "0.0.4"]
+
                  ;; nlp/ml
                  [com.zensols.nlp/parse "0.0.11"]
                  [com.zensols.ml/dataset "0.0.6"]
-                 [com.zensols.ml/model "0.0.7"]]
+                 [com.zensols.ml/model "0.0.8"]]
   :pom-plugins [[org.codehaus.mojo/appassembler-maven-plugin "1.6"
                  {:configuration ([:programs
                                    [:program
