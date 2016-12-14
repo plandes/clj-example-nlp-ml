@@ -16,18 +16,17 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
 
                  ;; logging
-                 [org.apache.logging.log4j/log4j-core "2.3"]
-                 [org.apache.logging.log4j/log4j-api "2.3"]
-                 [org.apache.logging.log4j/log4j-slf4j-impl "2.3"]
-                 [org.apache.logging.log4j/log4j-jcl "2.3"]
-                 [org.clojure/tools.logging "0.3.1"]
+                 [org.apache.logging.log4j/log4j-core "2.7"]
+                 [org.apache.logging.log4j/log4j-slf4j-impl "2.7"]
+                 [org.apache.logging.log4j/log4j-1.2-api "2.7"]
+                 [org.apache.logging.log4j/log4j-jcl "2.7"]
 
                  ;; zip
                  [com.zensols.tools/misc "0.0.4"]
 
                  ;; nlp/ml
-                 [com.zensols.nlp/parse "0.0.11"]
-                 [com.zensols.ml/dataset "0.0.6"]
+                 [com.zensols.nlp/parse "0.0.13"]
+                 [com.zensols.ml/dataset "0.0.7"]
                  [com.zensols.ml/model "0.0.8"]]
   :pom-plugins [[org.codehaus.mojo/appassembler-maven-plugin "1.6"
                  {:configuration ([:programs
@@ -41,5 +40,5 @@
              {:jvm-opts
               ["-Dlog4j.configurationFile=test-resources/log4j2.xml" "-Xms4g" "-Xmx12g" "-XX:+UseConcMarkSweepGC"]
               :dependencies [[nz.ac.waikato.cms.weka/weka-stable "3.6.12" :classifier "sources"]
-                             [com.zensols/clj-append "1.0.4"]]}}
+                             [com.zensols/clj-append "1.0.5"]]}}
   :main zensols.example.core)
