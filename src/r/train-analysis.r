@@ -22,6 +22,7 @@ overfit.graph <- function(analysis.dir, datname, export) {
     }
 }
 
-adir <- sprintf('%s/Desktop', Sys.getenv('HOME'))
+#adir <- sprintf('%s/Desktop', Sys.getenv('HOME'))
+adir <- '../../doc/results'
 dname <- 'speech-act-J48-train-test-series'
 overfit.graph(adir, dname, TRUE)
