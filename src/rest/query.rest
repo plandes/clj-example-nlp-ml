@@ -24,7 +24,7 @@ POST http://localhost:9200/example/instance/_search
     "fields": []
 }
 
-## states
+## stats
 GET http://localhost:9200/example/stats/_search
 {
     "query": { "match_all": {}},
