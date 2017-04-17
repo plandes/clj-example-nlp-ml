@@ -22,7 +22,6 @@
 
 (defn create-feature-sets [& adb-keys]
   (->> (apply adb/anons adb-keys)
-       (take 50)
        (map #(merge {:sa (:class-label %)
                      :utterance (->> % :instance :text)}
                     (create-features (:instance %))))))
