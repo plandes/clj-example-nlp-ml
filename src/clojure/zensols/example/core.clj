@@ -1,7 +1,8 @@
 (ns zensols.example.core
   (:require [zensols.actioncli.parse :as cli]
             [zensols.actioncli.log4j2 :as lu]
-            [zensols.actioncli.resource :as res])
+            [zensols.actioncli.resource :as res]
+            [zensols.model.weka])
   (:gen-class :main true))
 
 (defn- create-command-context []
@@ -12,4 +13,11 @@
 (defn -main [& args]
   (lu/configure "nlp-ml-log4j.xml")
   (let [command-context (create-command-context)]
-    (apply cli/process-arguments command-context args)))
+;; (->> zensols.model.weka/*classifiers*
+;;      vals
+;;      (apply concat)
+;;      (map #(Class/forName %))
+;;      (map println)
+;;      doall)
+    (cli/process-arguments command-context args)))
+

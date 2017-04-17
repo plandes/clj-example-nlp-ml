@@ -78,8 +78,10 @@
                   stopword-count
                   ))}))
 
-(dyn-init-var *ns* 'cross-fold-instances-inst (atom nil))
-(dyn-init-var *ns* 'train-test-instances-inst (atom nil))
+(defonce ^:private cross-fold-instances-inst (atom nil))
+(defonce ^:private train-test-instances-inst (atom nil))
+
+(->> @cross-fold-instances-inst count)
 
 (defn reset-instances []
   (reset! cross-fold-instances-inst nil)
@@ -98,7 +100,8 @@
            :divide-by-set divide-by-set})))
 
 (defn- main [& actions]
-  (binding [cl/*rand-fn* (fn [] (java.util.Random. 1))]
+  (binding [cl/*rand-fn* (fn [] (java.util.Random. 1))
+            ec/*cross-fold-count* 2]
    (with-model-conf (create-model-config)
      (let [classifiers [;:fast
                         ;:lazy :tree
@@ -107,6 +110,8 @@
                         :j48
                         ;:zeror
                         ]
+           classifiers (->> zensols.model.weka/*classifiers*
+                            keys)
            meta-set :set-best]
        (->> (map (fn [action]
                    (case action

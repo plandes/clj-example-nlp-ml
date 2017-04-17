@@ -20,9 +20,12 @@
                  [org.apache.logging.log4j/log4j-slf4j-impl "2.7"]
                  [org.apache.logging.log4j/log4j-1.2-api "2.7"]
                  [org.apache.logging.log4j/log4j-jcl "2.7"]
+                 [org.apache.logging.log4j/log4j-jul "2.7"]
 
                  ;; zip
                  [com.zensols.tools/misc "snapshot"]
+
+                 ;; move to ml-model
 
                  ;; nlp/ml
                  [com.zensols.nlp/parse "snapshot"]
