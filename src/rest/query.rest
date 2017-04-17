@@ -1,24 +1,49 @@
 # get all indexes
 GET http://localhost:9200/_cat/indices?v
 
-# get an instance
-POST http://localhost:9200/example/instance/_search
+# careful!
+#DELETE http://localhost:9200/example
+
+# mapping
+GET http://localhost:9200/example/dataset/_mapping
+
+# search
+POST http://localhost:9200/example/dataset/_search
 {
     "query": { "match_all": {}},
     "size": 1
 }
 
-# counts
-POST http://localhost:9200/example/instance/_count
+# distribution
+POST http://localhost:9200/example/dataset/_search
 {
-    "query": { "match_all": {}}
+    "aggs": {
+        "act_agg_name": {
+	    "terms": {"field": "class-label", "size": 0}
+        }
+    },
+    "size": 0
 }
 
-# mappings
-GET http://localhost:9200/example/_mappings
+# act by phase
+POST http://localhost:9200/example/dataset/_search
+{
+    "query": {
+        "term": {"class-label": "answer"}
+   },
+   "fields": ["class-label"],
+   "size": 5
+}
+
+# counts
+POST http://localhost:9200/example/dataset/_search
+{
+    "query": { "match_all": {}},
+    "size": 0
+}
 
 # just keys
-POST http://localhost:9200/example/instance/_search
+POST http://localhost:9200/example/dataset/_search
 {
     "query": { "match_all": {}},
     "fields": []

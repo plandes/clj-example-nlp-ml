@@ -127,6 +127,7 @@
                      9 (->> (ec/train-test-series
                              [:j48] :set-best {:start 0.1 :stop 1 :step 0.05})
                             ec/write-csv-train-test-series)
+                     10 (ec/print-best-results [:j48] :set-best)
                      ))
                  actions)
             doall)))))
