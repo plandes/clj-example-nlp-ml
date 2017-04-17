@@ -126,13 +126,12 @@
                      6 (->> (ec/create-model classifiers meta-set)
                             ec/train-model
                             ec/write-model)
-                     7 (adb/divide-by-set 0.8)
+                     7 (adb/divide-by-set 0.05)
                      8 (ec/compile-results classifiers meta-set
                                            :test-type :train-test)
                      9 (->> (ec/train-test-series
-                             [:j48] :set-best {:start 0.1 :stop 1 :step 0.05})
+                             [:j48] :set-best {:start 0.1 :stop 1 :step 0.03})
                             ec/write-csv-train-test-series)
-                     10 (ec/print-best-results [:j48] :set-best)
-                     ))
+                     10 (ec/print-best-results [:j48] :set-best)))
                  actions)
             doall)))))
