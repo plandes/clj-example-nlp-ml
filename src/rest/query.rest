@@ -49,6 +49,15 @@ POST http://localhost:9200/example/dataset/_search
     "fields": []
 }
 
+# search for text
+POST http://localhost:9200/example/dataset/_search
+{
+    "query": {
+      "match": {"_all": "pepsi major brands"}
+    },
+    "size": 1
+}
+
 ## stats
 GET http://localhost:9200/example/stats/_search
 {

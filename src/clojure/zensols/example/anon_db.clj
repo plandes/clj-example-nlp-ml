@@ -50,13 +50,17 @@
   (with-connection (connection)
     (db/instances-load)))
 
-(defn anons [& keys]
+(defn anons [& opts]
   (with-connection (connection)
-    (apply db/instances keys)))
+    (apply db/instances opts)))
 
-(defn divide-by-set [train-ratio & keys]
+(defn anon-by-id [& opts]
   (with-connection (connection)
-    (apply db/divide-by-set train-ratio keys)))
+    (apply db/instance-by-id opts)))
+
+(defn divide-by-set [train-ratio & opts]
+  (with-connection (connection)
+    (apply db/divide-by-set train-ratio opts)))
 
 (defn turn-on-test-set [test?]
   (with-connection (connection)

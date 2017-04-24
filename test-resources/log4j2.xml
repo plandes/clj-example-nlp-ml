@@ -13,7 +13,6 @@
 
     <loggers>
         <logger name="zensols" level="info"/>
-        <logger name="zensols.example.sa-tp-feature" level="debug"/>
         <root level="warn">
             <!--appenderRef ref="console"/-->
             <appenderRef ref="repl"/>
