@@ -1,12 +1,22 @@
-(ns zensols.example.sa-eval
+(ns ^{:doc "This is a simple evalution example.  See
+[[zensols.example.sa-tp-eval]] for a more complex example."
+      :author "Paul Landes"}
+    zensols.example.sa-eval
   (:require [clojure.tools.logging :as log]
             [clojure.set :refer (union)])
   (:require [zensols.actioncli.dynamic :refer (dyn-init-var) :as dyn]
+            [zensols.actioncli.resource :as res]
             [zensols.model.classifier :as cl]
-            [zensols.model.execute-classifier :refer (with-model-conf)]
+            [zensols.model.execute-classifier :refer (with-model-conf) :as ex]
             [zensols.model.eval-classifier :as ec])
   (:require [zensols.example.sa-feature :as sf]
             [zensols.example.anon-db :as adb]))
+
+(let [f (-> (System/getProperty "user.home")
+            (clojure.java.io/file "Desktop")
+            .getAbsolutePath)]
+  (res/register-resource :model-read :system-file f)
+  (res/register-resource :model-write :system-file f))
 
 ;; why does this return dups?
 ;; http://codereview.stackexchange.com/questions/12979/powerset-in-clojure
@@ -110,8 +120,6 @@
                         :j48
                         ;:zeror
                         ]
-           classifiers (->> zensols.model.weka/*classifiers*
-                            keys)
            meta-set :set-best]
        (->> (map (fn [action]
                    (case action
@@ -126,15 +134,21 @@
                      6 (->> (ec/create-model classifiers meta-set)
                             ec/train-model
                             ec/write-model)
-                     7 (adb/divide-by-set 0.05)
-                     8 (ec/compile-results classifiers meta-set
-                                           :test-type :train-test)
-                     9 (->> (ec/train-test-series
-                             [:j48] :set-best {:start 0.1 :stop 1 :step 0.03})
-                            ec/write-csv-train-test-series)
-                     10 (ec/print-best-results [:j48] :set-best)))
+                     7 (adb/divide-by-set 0.5)
+                     8 (binding [ec/*default-set-type* :train-test]
+                         (ec/compile-results classifiers meta-set))
+                     9 (ec/compile-results classifiers meta-set)
+                     10 (->> (ec/train-test-series
+                              [:j48] :set-best {:start 0.1 :stop 1 :step 0.03})
+                             ec/write-csv-train-test-series)
+                     11 (ec/print-best-results [:j48] :set-best)
+                     12 (ec/read-model)
+                     13 (-> (ec/read-model)
+                            (ex/print-model-info :results? true))
+                     14 (ec/display-features)
+                     15 (binding [ec/*default-set-type* :train-test]
+                          (ec/terse-results classifiers meta-set))
+                     16 (-> (ec/read-model)
+                            (ex/write-confusion-matrix "/d/conf.csv"))))
                  actions)
             doall)))))
-
-;(main 2)
-

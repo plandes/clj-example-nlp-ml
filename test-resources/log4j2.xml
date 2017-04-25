@@ -12,7 +12,8 @@
     </appenders>
 
     <loggers>
-        <logger name="zensols" level="info"/>
+        <logger name="zensols.example" level="info"/>
+        <logger name="zensols.model" level="info"/>
         <root level="warn">
             <!--appenderRef ref="console"/-->
             <appenderRef ref="repl"/>

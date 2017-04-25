@@ -51,7 +51,7 @@ for more information."
         two-pass? true
         meta-set :set-test-two-pass]
     (binding [cl/*rand-fn* (fn [] (java.util.Random. 1))
-              ec/*cross-fold-count* 2]
+              cl/*cross-fold-count* 2]
       (with-two-pass (create-model-config)
           (if two-pass?
             {:id-key sf/id-key
@@ -81,5 +81,3 @@ for more information."
                         10 (ec/print-best-results classifiers meta-set)))
                     actions)
                doall))))))
-
-(main 0 3)

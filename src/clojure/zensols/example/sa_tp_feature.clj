@@ -55,7 +55,8 @@ two pass cross validation.  See [[zensols.example.sa-tp-eval]]."
         anons (apply anons-fn (->> (flatten-keys adb-keys)
                                    (concat [:include-ids? true])))
         ;; we must provide keys so the second pass can correlate results back
-        ;; in the testing/training for each fold
+        ;; in the testing/training for each fold; the label is also needed for
+        ;; every instance
         fs (if (ec/executing-two-pass?)
              (->> anons
                   (map (fn [{:keys [id class-label]}]

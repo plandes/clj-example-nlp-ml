@@ -1,4 +1,7 @@
-(ns zensols.example.sa-feature
+(ns ^{:doc "This is a simple feature generation example.  See
+[[zensols.example.sa-tp-feature]] for a more complex example."
+      :author "Paul Landes"}
+    zensols.example.sa-feature
   (:require [clojure.tools.logging :as log])
   (:require [zensols.nlparse.parse :as p]
             [zensols.nlparse.feature.lang :as fe]
