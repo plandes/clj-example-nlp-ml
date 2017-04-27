@@ -49,7 +49,7 @@ two pass cross validation.  See [[zensols.example.sa-tp-eval]]."
 
 (defn create-feature-sets [& {:keys [context] :as adb-keys}]
   (log/infof "creating features with keys=%s: %s"
-             (keys adb-keys) (zs/trunc adb-keys))
+             adb-keys (zs/trunc adb-keys))
   (let [context (or context *context*)
         {:keys [anons-fn]} context
         anons (apply anons-fn (->> (flatten-keys adb-keys)
@@ -97,7 +97,7 @@ two pass cross validation.  See [[zensols.example.sa-tp-eval]]."
    :create-features-fn create-features
    :feature-metas-fn feature-metas
    :class-feature-meta-fn class-feature-meta
-   :create-context-fn create-context
+   :create-two-pass-context-fn create-context
    :model-return-keys #{:label :distributions :features}})
 
 (defn- main [& actions]
