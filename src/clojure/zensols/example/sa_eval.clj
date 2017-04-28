@@ -111,7 +111,7 @@
 
 (defn- main [& actions]
   (binding [cl/*rand-fn* (fn [] (java.util.Random. 1))
-            ec/*cross-fold-count* 2]
+            cl/*cross-fold-count* 2]
    (with-model-conf (create-model-config)
      (let [classifiers [;:fast
                         ;:lazy :tree

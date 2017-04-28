@@ -22,19 +22,10 @@
                  [org.apache.logging.log4j/log4j-jcl "2.7"]
                  [org.apache.logging.log4j/log4j-jul "2.7"]
 
-                 ;; zip
-                 [com.zensols.tools/misc "snapshot"]
-
-                 ;; move to ml-model
-
                  ;; nlp/ml
-                 [com.zensols.nlp/parse "snapshot"]
-                 [com.zensols.ml/dataset "snapshot"]
-                 [com.zensols.ml/model "snapshot"]
-
-                 [com.zensols.tools/misc "snapshot"]
-                 [com.zensols.tools/actioncli "snapshot"]
-                 [com.zensols.nlp/feature "snapshot"]]
+                 [com.zensols.nlp/parse "0.0.16"]
+                 [com.zensols.ml/model "0.0.9"]
+                 [com.zensols.ml/dataset "0.0.8"]]
   :pom-plugins [[org.codehaus.mojo/appassembler-maven-plugin "1.6"
                  {:configuration ([:programs
                                    [:program
@@ -46,6 +37,6 @@
              :dev
              {:jvm-opts
               ["-Dlog4j.configurationFile=test-resources/log4j2.xml" "-Xms4g" "-Xmx12g" "-XX:+UseConcMarkSweepGC"]
-              :dependencies [[nz.ac.waikato.cms.weka/weka-stable "3.6.12" :classifier "sources"]
+              :dependencies [[nz.ac.waikato.cms.weka/weka-stable "3.8.1" :classifier "sources"]
                              [com.zensols/clj-append "1.0.5"]]}}
   :main zensols.example.core)
