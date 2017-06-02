@@ -14,4 +14,3 @@
   (lu/configure "nlp-ml-log4j.xml")
   (let [command-context (create-command-context)]
     (cli/process-arguments command-context args)))
-
