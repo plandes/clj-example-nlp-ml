@@ -13,11 +13,5 @@
 (defn -main [& args]
   (lu/configure "nlp-ml-log4j.xml")
   (let [command-context (create-command-context)]
-;; (->> zensols.model.weka/*classifiers*
-;;      vals
-;;      (apply concat)
-;;      (map #(Class/forName %))
-;;      (map println)
-;;      doall)
     (cli/process-arguments command-context args)))
 
