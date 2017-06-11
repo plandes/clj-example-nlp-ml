@@ -24,7 +24,7 @@
 
                  ;; nlp/ml
                  [com.zensols.nlp/parse "0.0.16"]
-                 [com.zensols.ml/model "0.0.9"]
+                 [com.zensols.ml/model "0.0.13"]
                  [com.zensols.ml/dataset "0.0.8"]]
   :pom-plugins [[org.codehaus.mojo/appassembler-maven-plugin "1.6"
                  {:configuration ([:programs
