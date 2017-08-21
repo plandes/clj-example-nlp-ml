@@ -24,7 +24,7 @@
 
                  ;; nlp/ml
                  [com.zensols.nlp/parse "0.0.16"]
-                 [com.zensols.ml/model "0.0.13"]
+                 [com.zensols.ml/model "0.0.14"]
                  [com.zensols.ml/dataset "0.0.8"]]
   :pom-plugins [[org.codehaus.mojo/appassembler-maven-plugin "1.6"
                  {:configuration ([:programs
@@ -36,7 +36,6 @@
              :appassem {:aot :all}
              :dev
              {:jvm-opts
-              ["-Dlog4j.configurationFile=test-resources/log4j2.xml" "-Xms4g" "-Xmx12g" "-XX:+UseConcMarkSweepGC"]
-              :dependencies [[nz.ac.waikato.cms.weka/weka-stable "3.8.1" :classifier "sources"]
-                             [com.zensols/clj-append "1.0.5"]]}}
+              ["-Dlog4j.configurationFile=test-resources/log4j2.xml" "-Xms4g" "-Xmx12g" "-XX:+UseConcMarkSweepGC"]}
+             :test {:jvm-opts ["-Dlog4j.configurationFile=test-resources/test-log4j2.xml" "-Xms4g" "-Xmx12g" "-XX:+UseConcMarkSweepGC"]}}
   :main zensols.example.core)

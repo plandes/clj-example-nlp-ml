@@ -109,7 +109,7 @@
            :feature-sets-set (feature-sets-set)
            :divide-by-set divide-by-set})))
 
-(defn- main [& actions]
+(defn main [& actions]
   (binding [cl/*rand-fn* (fn [] (java.util.Random. 1))
             cl/*cross-fold-count* 2]
    (with-model-conf (create-model-config)
@@ -131,9 +131,9 @@
                      3 (ec/terse-results classifiers meta-set :only-stats? true)
                      4 (ec/eval-and-write classifiers meta-set)
                      5 (ec/create-model classifiers meta-set)
-                     6 (->> (ec/create-model classifiers meta-set)
-                            ec/train-model
-                            ec/write-model)
+                     'wm (->> (ec/create-model classifiers meta-set)
+                              ec/train-model
+                              ec/write-model)
                      7 (adb/divide-by-set 0.5)
                      8 (binding [ec/*default-set-type* :train-test]
                          (ec/compile-results classifiers meta-set))

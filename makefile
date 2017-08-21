@@ -6,18 +6,26 @@ APP_NAME=	saclassify
 ZBHOME=		../clj-zenbuild
 
 # clean the generated app assembly file
-ADD_CLEAN+=	$(ASBIN_DIR)
+MLINK ?=	$(HOME)/opt/nlp/model
+ADD_CLEAN +=	model $(ASBIN_DIR)
 
 all:		info
 
 include $(ZBHOME)/src/mk/compile.mk
 include $(ZBHOME)/src/mk/dist.mk
 
-.PHONEY:
+.PHONY:	prepare-dist
 prepare-dist:
 	mkdir src/asbin
 	echo 'JAVA_OPTS="-Dzensols.model=$(HOME)/opt/nlp/model"' > src/asbin/setupenv
 
-.PHONEY:
+.PHONY:	clean-prepare-dist
 clean-prepare-dist:
 	rm -rf src/asbin
+
+.PHONY: test
+test:
+	docker-compose up -d
+	ln -s $(MLINK) || true
+	lein test
+	docker-compose down
