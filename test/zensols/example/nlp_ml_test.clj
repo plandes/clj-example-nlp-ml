@@ -8,7 +8,9 @@
 
 (defn load-corpora []
   (if (= 0 (count (db/anons)))
-    (db/load-corpora)))
+    (db/load-corpora))
+  ;; elastic search eventual consistency
+  (Thread/sleep 3000))
 
 (defmacro with-test-resources
   {:style/indent 0}
