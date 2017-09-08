@@ -91,8 +91,6 @@
 (defonce ^:private cross-fold-instances-inst (atom nil))
 (defonce ^:private train-test-instances-inst (atom nil))
 
-(->> @cross-fold-instances-inst count)
-
 (defn reset-instances []
   (reset! cross-fold-instances-inst nil)
   (reset! train-test-instances-inst nil))
