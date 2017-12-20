@@ -1,7 +1,7 @@
 (ns zensols.example.anon-db
   (:require [clojure.java.io :as io]
             [clojure.tools.logging :as log])
-  (:require [zensols.actioncli.dynamic :refer (defa-) :as dyn]
+  (:require [zensols.actioncli.dynamic :as dyn]
             [zensols.actioncli.log4j2 :as lu]
             [zensols.actioncli.resource :as res]
             [zensols.nlparse.parse :as p]
@@ -20,7 +20,7 @@
 
 (def ^:private corpora-dir "corpora")
 
-(defa- conn-inst)
+(defonce ^:private conn-inst (atom nil))
 
 (defn reset-instances []
   (reset! conn-inst nil))
