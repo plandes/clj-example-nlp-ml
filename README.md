@@ -1,5 +1,8 @@
-Example Project for Natural Language Processing and Machine Learning Libraries
-==============================================================================
+# Example Project for Natural Language Processing and Machine Learning Libraries
+
+**Note**: [This repository](https://github.com/plandes/todo-task) has a more up
+to date and better example of a real (academic) project of how to use these
+libraries.
 
 This is a simple and small example of how to use the following libraries:
 
@@ -16,18 +19,34 @@ Note that the library also illustrates how to use the
 [action command line interface library](https://github.com/plandes/clj-actioncli)
 as you can [build out a CLI version](#command-line).
 
-Documentation
--------------
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+## Table of Contents
+
+- [Documentation](#documentation)
+- [Usage](#usage)
+    - [REPL](#repl)
+    - [Command line](#command-line)
+- [Building](#building)
+- [License](#license)
+
+<!-- markdown-toc end -->
+
+
+## Documentation
+
 API (incomplete) [documentation](https://plandes.github.io/clj-example-nlp-ml/codox/index.html).
 
-Usage
------
+
+## Usage
+
 This project provides a real working example of a statistical natural language
 processing program.  The code itself is given as examples in the libraries it
 uses (see top of this README).  To use, clone the repository and build with
 lein (see the [command line docs](#command-line)).
 
+
 ### REPL
+
 ```clojure
 user> (System/setProperty "zensols.model" "path-to-model")
 user> (require '[zensols.example.sa-model :as sa])
@@ -38,7 +57,9 @@ INFO  2016-07-15 18:19:01.565: stanford: creating ner annotators: ["edu/stanford
 => "question"
 ```
 
+
 ### Command line
+
 1. Install [Leiningen](http://leiningen.org) (this is just a script)
 2. Install [GNU make](https://www.gnu.org/software/make/)
 3. Install [Git](https://git-scm.com)
@@ -49,8 +70,9 @@ INFO  2016-07-15 18:19:01.565: stanford: creating ner annotators: ["edu/stanford
 7. Load the corpus into Elasticsearch: `cd ~/Desktop/nlp-ml-example/bin ; ./saclassify load-corpus`
 8. Run: `./saclassify classify -u 'when will we get there'`
 
-Building
---------
+
+# Building
+
 All [leiningen](http://leiningen.org) tasks will work in this project.  For
 additional build functionality (git tag convenience utility functionality)
 clone the [Clojure build repo](https://github.com/plandes/clj-zenbuild) in the
@@ -60,20 +82,24 @@ same (parent of this file) directory as this project:
    git clone https://github.com/plandes/clj-zenbuild
 ```
 
-License
---------
-Copyright © 2016 Paul Landes
+## License
 
-Apache License version 2.0
+Copyright (c) 2016, 2017, 2018 Paul Landes
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
 
-[http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

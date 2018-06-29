@@ -1,8 +1,8 @@
 (defproject com.zensols.example/nlp-ml-example "0.1.0-SNAPSHOT"
   :description "Example Project for Natural Language Processing and Machine Learning Libraries"
   :url "https://github.com/plandes/clj-example-nlp-ml"
-  :license {:name "Apache License version 2.0"
-            :url "https://www.apache.org/licenses/LICENSE-2.0"
+  :license {:name "MIT"
+            :url "https://opensource.org/licenses/MIT"
             :distribution :repo}
   :plugins [[lein-codox "0.9.5"]]
   :codox {:metadata {:doc/format :markdown}
